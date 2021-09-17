@@ -1,6 +1,106 @@
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
-document.addEventListener("DOMContentLoaded", function(e){
 
+var productDetail;
+var comments;
+
+document.addEventListener("DOMContentLoaded", function(e){
+    getJSONData(PRODUCT_INFO_URL).then(function (result) {
+        if (result.status === "ok") {// si el estado del resultado es estrictamente igual al string ok
+            productDetail = result.data;
+            showDescription(); // función para poder cargar la información del producto en la tabla de detalle
+            showImages(); // función para poder cargar las imagenes en el carousel
+            showComments(); // función para cargar los comentarios
+        }
+    })
 });
+
+function showDescription() {
+    document.getElementById("infoProduct").innerHTML = '<tr>' +
+        '<td>' + productDetail.name +'</td>' +
+        '<td>' + productDetail.description +'</td>' +
+        '<td>' + productDetail.cost +'</td>' +
+        '<td>' + productDetail.soldCount +'</td>' +
+        '<td>' + productDetail.currency +'</td>' +
+        '<td>' + productDetail.category +'</td>' +
+        '</tr>';
+}
+
+function showImages() {
+    if (productDetail && productDetail.images) {
+        const divSlide = document.getElementById("slide");
+
+        for (let i = 0; i < productDetail.images.length; i++) {
+            const active = (i === 0) ? "active" : "";
+            const contenido = '<div class="carousel-item ' + active + '">' +
+                '<img class="d-block w-100" src="' + productDetail.images[i] + '" alt="First slide">' +
+                '</div>';
+            divSlide.innerHTML += contenido;
+        }
+    }
+}
+
+async function showComments() {
+    if (!comments) {
+        await getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function (result) {
+            if (result.status === "ok") {// si el estado del resultado es estrictamente igual al string ok
+                comments = result.data;
+            }
+        })
+    }
+
+    if (comments) {
+        for (let i = 0; i < comments.length; i++) {
+            document.getElementById("comments").innerHTML += '<tr>' +
+                '<td>' + comments[i].score + '</td>' +
+                '<td>' + comments[i].description +'</td>' +
+                '<td>' + comments[i].user +'</td>' +
+                '<td>' + comments[i].dateTime +'</td>' +
+                '</tr>';
+        }
+    }
+}
+
+function submitComment() {
+    const divError = document.getElementById("divError"); // Div en el cual se visualiza el error.
+    const description = document.getElementById("description").value; // Valor del input description
+    const score = document.getElementById("score").value; // Valor del input score
+    const user = JSON.parse(localStorage.getItem("user"))?.usuario; // Obtenemos el usuario logueado. (el ? chequea si user se encuentra definido)
+    const dateTime = new Date().toISOString(); // Obtenemos fecha actual del sistema.
+
+    let error = false; // Por defecto no hay errores;
+    let msg = ""; // Mensaje en vacío
+
+    if (!user) {
+        error = true;
+        msg = "Debe estar logueado para comentar";
+    } else if (!description || description === "") {
+        error = true;
+        msg = "Debe ingresar un comentario";
+    } else if (!score || score < 0 || score > 5){
+        error = true;
+        msg = "Debe ingresar una puntuación entre 0 y 5";
+    }
+
+
+    // Si existe algún error
+    if (error) {
+        divError.style.display = "block"; // Muestro el contenedor del error
+        document.getElementById("errorMsg").innerHTML = msg; // Actualizo el contenedor del mensaje.
+    } else {
+        divError.style.display = "none"; // Oculto el contenedor del error
+        document.getElementById("errorMsg").innerHTML = msg; // Dejo el mensaje en vacío
+        document.getElementById("description").value = ""; // Limpio el input de descripción
+        document.getElementById("score").value = ""; // limpio el input de la puntuación
+        // Genero el JSON y lo agrego a mi lista de comentarios.
+        comments.push({
+            score,
+            description,
+            user,
+            dateTime
+        })
+        // Vuelvo a mostrar los comentarios con el nuevo comentario agregado. (No se vuelve a llamar a la API dado que los comentarios ya se encuentran cargados.)
+        showComments().then();
+    }
+}

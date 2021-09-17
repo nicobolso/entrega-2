@@ -16,6 +16,7 @@ function mostrarProductos(array) {
                 <p> Precio: `+ auto.cost + `</p>
                 <p> Moneda: `+ auto.currency + `</p>
                 <p>Vendidos: `+ auto.soldCount + `</p>
+                <a href="product-info.html">Ver info</a>
                 </div>
                 </div>
             `;
