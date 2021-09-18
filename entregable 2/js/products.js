@@ -75,7 +75,7 @@ document.getElementById("filtrar").addEventListener('click', function () {
 
 document.getElementById("ascendente").addEventListener('click', function () {
 
-    productos = productos.sort((a, b) => {
+    productos = productos.sort((a, b) => {// Con la funcion sort me devuelve la lista de productos ordenada de forma ascendente
         if (a.cost > b.cost) { return 1 }
         if (a.cost < b.cost) { return -1 }
         return 0
@@ -94,7 +94,7 @@ document.getElementById("descendente").addEventListener('click', function () {
     
 });
 document.getElementById("vendidos").addEventListener('click', function () {
-    productos = productos.sort((a, b) => {
+    productos = productos.sort((a, b) => {// Me devuelve la lisa de productos ordenada por releancia, es decir los mas vendidos
         if (a.soldCount < b.soldCount) { return 1 }
         if (a.soldCount > b.soldCount) { return -1 }
         return 0
@@ -105,7 +105,7 @@ document.getElementById("vendidos").addEventListener('click', function () {
 });
 
 document.getElementById("limpiar").addEventListener("click", function () {
-    document.getElementById("minimo").value = "";
+    document.getElementById("minimo").value = "";// Mediante un click limpia la lista de productos y la deja commo undefined
     document.getElementById("maximo").value = "";
 
     minCost = undefined;

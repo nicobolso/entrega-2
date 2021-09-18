@@ -29,11 +29,11 @@ function showDescription() {
 
 function showImages() {
     if (productDetail && productDetail.images) {
-        const divSlide = document.getElementById("slide");
+        var divSlide = document.getElementById("slide");
 
         for (let i = 0; i < productDetail.images.length; i++) {
-            const active = (i === 0) ? "active" : "";
-            const contenido = '<div class="carousel-item ' + active + '">' +
+            var active = (i === 0) ? "active" : "";
+            var contenido = '<div class="carousel-item ' + active + '">' +
                 '<img class="d-block w-100" src="' + productDetail.images[i] + '" alt="First slide">' +
                 '</div>';
             divSlide.innerHTML += contenido;
@@ -45,7 +45,7 @@ async function showComments() {
     if (!comments) {
         await getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function (result) {
             if (result.status === "ok") {// si el estado del resultado es estrictamente igual al string ok
-                comments = result.data;
+                comments = result.data;// Entro y digo que la variable comments es igual al resultado de la data
             }
         })
     }
@@ -66,11 +66,11 @@ function submitComment() {
     const divError = document.getElementById("divError"); // Div en el cual se visualiza el error.
     const description = document.getElementById("description").value; // Valor del input description
     const score = document.getElementById("score").value; // Valor del input score
-    const user = JSON.parse(localStorage.getItem("user"))?.usuario; // Obtenemos el usuario logueado. (el ? chequea si user se encuentra definido)
+    const user = JSON.parse(localStorage.getItem("user"))?.usuario; // Obtenemos el usuario logueado. (el ? se encarvga de ver si user se encuentra definido)
     const dateTime = new Date().toISOString(); // Obtenemos fecha actual del sistema.
 
     let error = false; // Por defecto no hay errores;
-    let msg = ""; // Mensaje en vacío
+    let msg = ""; 
 
     if (!user) {
         error = true;
@@ -100,7 +100,7 @@ function submitComment() {
             user,
             dateTime
         })
-        // Vuelvo a mostrar los comentarios con el nuevo comentario agregado. (No se vuelve a llamar a la API dado que los comentarios ya se encuentran cargados.)
+        // Vuelvo a mostrar los comentarios con el nuevo comentario agregado. 
         showComments().then();
     }
 }
