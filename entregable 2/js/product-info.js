@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(PRODUCT_INFO_URL).then(function (result) {
         if (result.status === "ok") {// si el estado del resultado es estrictamente igual al string ok
             productDetail = result.data;
-            showDescription(); // función para poder cargar la información del producto en la tabla de detalle
+            showDescription(); // función para poder cargar la información del producto 
             showImages(); // función para poder cargar las imagenes en el carousel
             showComments(); // función para cargar los comentarios
         }
