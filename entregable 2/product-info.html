@@ -38,7 +38,12 @@
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
           </a>
+          
+        
         </div>
+      </div>
+
+
       </div>
       <div class="col-8">
         <h1 class="text-center">Información</h1>
@@ -61,12 +66,12 @@
     <div class="row">
       <h1 class="text-center col-12">Comentarios</h1>
       <div class="table-responsive table-bordered col-12">
-        <table class="table">
+        <table class="table" class="table table-bordered table-dark">
           <thead>
-            <th>Puntuación</th>
-            <th>Comentario</th>
-            <th>Usuario</th>
-            <th>Fecha</th>
+            <th scope="col">Puntuación</th>
+            <th scope="col">>Comentario</th>
+            <th scope="col">Usuario</th>
+            <th scope="col">Fecha</th>
           </thead>
           <tbody id="comments"></tbody>
         </table>
@@ -88,8 +93,12 @@
 
             <input type="number" class="form-control" min="0" max="5" id="score" placeholder="Puntuación">
           </div>
-          <button type="button" onclick="submitComment()" class="btn btn-primary float-right">Enviar</button>
+          <button type="button" onclick="submitComment()" class="btn btn-secondary btn-sm">Enviar</button>
         </form>
+      </div>
+      <div class="col-12 mt-4">
+        <h3 class="text-center col-12">Productos relacionados</h3>
+        <div class="row" id="relacionados"></div>
       </div>
     </div>
   </div>

@@ -5,25 +5,26 @@
 var productDetail;
 var comments;
 
-document.addEventListener("DOMContentLoaded", function(e){
+document.addEventListener("DOMContentLoaded", function (e) {
     getJSONData(PRODUCT_INFO_URL).then(function (result) {
         if (result.status === "ok") {// si el estado del resultado es estrictamente igual al string ok
             productDetail = result.data;
             showDescription(); // función para poder cargar la información del producto 
             showImages(); // función para poder cargar las imagenes en el carousel
             showComments(); // función para cargar los comentarios
+            showRelatedProducts();// función para cargar  los productos relacionados
         }
     })
 });
 
 function showDescription() {
-    document.getElementById("infoProduct").innerHTML = '<tr>' +
-        '<td>' + productDetail.name +'</td>' +
-        '<td>' + productDetail.description +'</td>' +
-        '<td>' + productDetail.cost +'</td>' +
-        '<td>' + productDetail.soldCount +'</td>' +
-        '<td>' + productDetail.currency +'</td>' +
-        '<td>' + productDetail.category +'</td>' +
+    document.getElementById("infoProduct").innerHTML = '<tr >' +
+        '<td >' + productDetail.name + '</td>' +
+        '<td >' + productDetail.description + '</td>' +
+        '<td >' + productDetail.cost + '</td>' +
+        '<td >' + productDetail.soldCount + '</td>' +
+        '<td >' + productDetail.currency + '</td>' +
+        '<td >' + productDetail.category + '</td>' +
         '</tr>';
 }
 
@@ -36,6 +37,8 @@ function showImages() {
             var contenido = '<div class="carousel-item ' + active + '">' +
                 '<img class="d-block w-100" src="' + productDetail.images[i] + '" alt="First slide">' +
                 '</div>';
+
+
             divSlide.innerHTML += contenido;
         }
     }
@@ -54,9 +57,9 @@ async function showComments() {
         for (let i = 0; i < comments.length; i++) {
             document.getElementById("comments").innerHTML += '<tr>' +
                 '<td>' + comments[i].score + '</td>' +
-                '<td>' + comments[i].description +'</td>' +
-                '<td>' + comments[i].user +'</td>' +
-                '<td>' + comments[i].dateTime +'</td>' +
+                '<td>' + comments[i].description + '</td>' +
+                '<td>' + comments[i].user + '</td>' +
+                '<td>' + comments[i].dateTime + '</td>' +
                 '</tr>';
         }
     }
@@ -70,7 +73,7 @@ function submitComment() {
     const dateTime = new Date().toISOString(); // Obtenemos fecha actual del sistema.
 
     let error = false; // Por defecto no hay errores;
-    let msg = ""; 
+    let msg = "";
 
     if (!user) {
         error = true;
@@ -78,7 +81,7 @@ function submitComment() {
     } else if (!description || description === "") {
         error = true;
         msg = "Debe ingresar un comentario";
-    } else if (!score || score < 0 || score > 5){
+    } else if (!score || score < 0 || score > 5) {
         error = true;
         msg = "Debe ingresar una puntuación entre 0 y 5";
     }
@@ -103,4 +106,45 @@ function submitComment() {
         // Vuelvo a mostrar los comentarios con el nuevo comentario agregado. 
         showComments().then();
     }
+}
+
+
+function showRelatedProducts() {
+      console.log(products);
+    const related = productDetail?.relatedProduct;
+    if(related){
+        getJSONData(PRODUCTS_URL).then(function (result) {
+            if (result.status === "ok") {//si el estado del resultado es estrictamente igual al string ok
+               const products = result.data;
+               for(let i = 0; i< related.lenght; i++){
+                   console.log(products[related[i]]);
+
+               }
+               console.log(result);
+            }
+        })
+
+        
+
+
+    }
+
+       /* if(category){
+    for(let i = 0;i < category.relatedProducts.lenght; i ++)
+    document.getElementById("relacionados"); 
+      let  category =
+     ' <div class=container>'
+      '<div class=row>'
+     '<div class=col-12 mt-5>'
+     '<div class="relacionados">'
+        '<p>' + relatedProducts[1] +'</p>' +
+        '<p >' + relatedProucts[3] +'</p>' 
+        '</div>'
+        '</div>'
+        '</div>'
+        '</div>'
+        console.log(relatedProducs[1]);
+        document.getElementById("relacionados").innerHTML = category;
+    }  
+  */  
 }

@@ -9,6 +9,8 @@ function mostrarProductos(array) {
         const contenido =//declaro la variable contendio donde voy a guardar los elementos que traigo del array
                 `
                 <div class=container>
+                <div class=row>
+                <div class=col-12 mt-5>
                 <div class= lista >
                 <img width="300px"  src= "` + auto.imgSrc + `">
                 <p> Modelo: `+ auto.name + `</p>
@@ -17,6 +19,8 @@ function mostrarProductos(array) {
                 <p> Moneda: `+ auto.currency + `</p>
                 <p>Vendidos: `+ auto.soldCount + `</p>
                 <a href="product-info.html">Ver info</a>
+                </div>
+                </div>
                 </div>
                 </div>
             `;
