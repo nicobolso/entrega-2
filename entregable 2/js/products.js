@@ -8,30 +8,24 @@ function mostrarProductos(array) {
         const auto = array[i];//Creo la variable products para acceder a los elementos del array
         const contenido =//declaro la variable contendio donde voy a guardar los elementos que traigo del array
                 `
-                <div class=container>
-                <div class=row>
-                <div class=col-12 mt-5>
-                <div class= lista >
-                <img width="300px"  src= "` + auto.imgSrc + `">
-                <p> Modelo: `+ auto.name + `</p>
-                <p> Descripcion: `+ auto.description + `</p>
-                <p> Precio: `+ auto.cost + `</p>
-                <p> Moneda: `+ auto.currency + `</p>
-                <p>Vendidos: `+ auto.soldCount + `</p>
-                <a href="product-info.html">Ver info</a>
-                </div>
-                </div>
-                </div>
+                <div class="lista">
+                    <img width="300px"  src= "` + auto.imgSrc + `">
+                    <p> Modelo: `+ auto.name + `</p>
+                    <p> Descripcion: `+ auto.description + `</p>
+                    <p> Precio: `+ auto.cost + `</p>
+                    <p> Moneda: `+ auto.currency + `</p>
+                    <p>Vendidos: `+ auto.soldCount + `</p>
+                    <a href="product-info.html">Ver info</a>
                 </div>
             `;
-        
+
         /** condicionales para filtros de máximo y mínimo
          if
 
          * 1 - si existe mínimo y es menor o igual al costo del auto y (maximo existe y maximo es mayor al costo del auto o maximo no existe)
          * 2 - si existe máximo y es mayor o igual al costo del auto y (mínimo existe y minimo es menor al costo del auto o minimo no existe)
-         * 3 - si existe minimo y maximo y el costo del auto esta entre|igual al minimo y el maximo  
-         
+         * 3 - si existe minimo y maximo y el costo del auto esta entre|igual al minimo y el maximo
+
          else if
 
          * si no existe minimo ni maximo, esto quiere decir que no se estan usando los filtros e imprime todos los autos.
@@ -39,9 +33,9 @@ function mostrarProductos(array) {
 
         if ((minCost && parseInt(auto.cost) >= minCost
          && ((maxCost && (parseInt(auto.cost) <= maxCost) || maxCost === undefined)))
-        || (maxCost && maxCost >= parseInt(auto.cost) 
+        || (maxCost && maxCost >= parseInt(auto.cost)
         && ((minCost && (minCost <= parseInt(auto.cost)) || minCost === undefined)))
-        || (maxCost && minCost && parseInt(auto.cost) <= maxCost && parseInt(auto.cost) >= minCost)) {             
+        || (maxCost && minCost && parseInt(auto.cost) <= maxCost && parseInt(auto.cost) >= minCost)) {
             document.getElementById("lista").innerHTML += contenido;
         } else if (!minCost && !maxCost) {
             document.getElementById("lista").innerHTML += contenido;
@@ -49,7 +43,7 @@ function mostrarProductos(array) {
     }
 }
 
-document.addEventListener("DOMContentLoaded", function (e) {//con el evento llamo a la funcion a la que le paso por parametro la url 
+document.addEventListener("DOMContentLoaded", function (e) {//con el evento llamo a la funcion a la que le paso por parametro la url
     getJSONData(PRODUCTS_URL).then(function (result) {
         if (result.status === "ok") {//si el estado del resultado es estrictamente igual al string ok
             productos = result.data;
@@ -61,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function (e) {//con el evento llam
 document.getElementById("filtrar").addEventListener('click', function () {
     const min = document.getElementById("minimo").value;
     const max = document.getElementById("maximo").value;
-    
+
     if (min && min != "" && parseInt(min) >= 0) {
         minCost = parseInt(min);
     } else {
@@ -95,7 +89,7 @@ document.getElementById("descendente").addEventListener('click', function () {
 
     });
     mostrarProductos(productos)
-    
+
 });
 document.getElementById("vendidos").addEventListener('click', function () {
     productos = productos.sort((a, b) => {// Me devuelve la lisa de productos ordenada por releancia, es decir los mas vendidos
@@ -114,7 +108,7 @@ document.getElementById("limpiar").addEventListener("click", function () {
 
     minCost = undefined;
     maxCost = undefined;
-    
+
     mostrarProductos(productos);
 });
 

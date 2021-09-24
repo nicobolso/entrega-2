@@ -26,51 +26,26 @@
     </div>
   </nav>
 
-
-
-
-
-
-
-  <div class="filtro"> 
-    <button class="btn btn-secondary btn-sm" id="ascendente">Menor precio</button>
-    <button class="btn btn-secondary btn-sm"  id="descendente">Mayor precio</button>
-    <button class="btn btn-secondary btn-sm"  id="vendidos">Más vendidos</button><br><br>
-    <input id="minimo"  type="number" placeholder="min">
-    <input id="maximo" type="number" placeholder="max">
-    <button id="filtrar" class="btn btn-secondary btn-sm">Filtrar</button>
-    <button id="limpiar" class="btn btn-secondary btn-sm">Limpiar</button>
-
-  </div>
-  <div class="row">
-    <div class="cotainer">
-  <div class="row justify-content-end">
-    <div class="col-md-6"></div>
-      <div class="col-md-6 col-sm-12 mb-1 container">
-        <div class="row container p-0 m-0">
-          <div class="col">
-            <div id="lista" class=" lista">
-            <p class="font-weight-normal text-right my-2">Cant.</p>
-           
-          </div>
-        </div>
+  <div class="container">
+    <div class="row">
+      <div class="filtro mt-5">
+        <button class="btn btn-secondary btn-sm" id="ascendente">Menor precio</button>
+        <button class="btn btn-secondary btn-sm"  id="descendente">Mayor precio</button>
+        <button class="btn btn-secondary btn-sm"  id="vendidos">Más vendidos</button><br><br>
+        <input id="minimo"  type="number" placeholder="min">
+        <input id="maximo" type="number" placeholder="max">
+        <button id="filtrar" class="btn btn-secondary btn-sm">Filtrar</button>
+        <button id="limpiar" class="btn btn-secondary btn-sm">Limpiar</button>
       </div>
-        </div>
+      <div id="lista" class="col-12 d-table-row d-sm-flex justify-content-center">
+        <p class="font-weight-normal text-right my-2">Cant.</p
       </div>
     </div>
-        </div>
-        </div>
-      
-
+  </div>
 
   <footer class="text-muted bg-light">
-
-    <div id="lista" class="list-group-item d-flex justify-content-between align-items-center">
-    </div>
-  </div>
-    </div>
+    <div id="lista" class="list-group-item d-flex justify-content-between align-items-center"></div>
     <div class="container">
-
       <p class="float-right">
         <a href="#">Volver arriba</a>
       </p>
@@ -78,6 +53,7 @@
       <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
     </div>
   </footer>
+
   <div id="spinner-wrapper">
     <div class="lds-ring">
       <div></div>
@@ -91,5 +67,4 @@
   <script src="js/init.js"></script>
   <script src="js/products.js"></script>
 </body>
-
 </html>

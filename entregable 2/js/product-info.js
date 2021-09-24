@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
     getJSONData(PRODUCT_INFO_URL).then(function (result) {
         if (result.status === "ok") {// si el estado del resultado es estrictamente igual al string ok
             productDetail = result.data;
-            showDescription(); // función para poder cargar la información del producto 
+            showDescription(); // función para poder cargar la información del producto
             showImages(); // función para poder cargar las imagenes en el carousel
             showComments(); // función para cargar los comentarios
             showRelatedProducts();// función para cargar  los productos relacionados
@@ -103,48 +103,28 @@ function submitComment() {
             user,
             dateTime
         })
-        // Vuelvo a mostrar los comentarios con el nuevo comentario agregado. 
+        // Vuelvo a mostrar los comentarios con el nuevo comentario agregado.
         showComments().then();
     }
 }
 
 
 function showRelatedProducts() {
-      console.log(products);
-    const related = productDetail?.relatedProduct;
+    const related = productDetail?.relatedProducts;
     if(related){
         getJSONData(PRODUCTS_URL).then(function (result) {
             if (result.status === "ok") {//si el estado del resultado es estrictamente igual al string ok
                const products = result.data;
-               for(let i = 0; i< related.lenght; i++){
-                   console.log(products[related[i]]);
-
+               for(let i = 0; i < related.length; i++){
+                   const pR = products[related[i]];
+                   document.getElementById("relacionados").innerHTML += `<div class="lista text-center">
+                        <img class="mb-2" width="auto" height="120px" src="${pR.imgSrc}" alt="Image-${i}">
+                        <p><b>Nombre:</b> ${pR.name}</p>
+                        <p><b>Descripción:</b> ${pR.description}</p>
+                        <p><b>Costo:</b> ${pR.currency} ${pR.cost}</p>
+                    </div>`;
                }
-               console.log(result);
             }
         })
-
-        
-
-
     }
-
-       /* if(category){
-    for(let i = 0;i < category.relatedProducts.lenght; i ++)
-    document.getElementById("relacionados"); 
-      let  category =
-     ' <div class=container>'
-      '<div class=row>'
-     '<div class=col-12 mt-5>'
-     '<div class="relacionados">'
-        '<p>' + relatedProducts[1] +'</p>' +
-        '<p >' + relatedProucts[3] +'</p>' 
-        '</div>'
-        '</div>'
-        '</div>'
-        '</div>'
-        console.log(relatedProducs[1]);
-        document.getElementById("relacionados").innerHTML = category;
-    }  
-  */  
 }
