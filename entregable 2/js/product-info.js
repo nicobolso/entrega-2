@@ -110,19 +110,20 @@ function submitComment() {
 
 
 function showRelatedProducts() {
-    const related = productDetail?.relatedProducts;
+    const related = productDetail.relatedProducts;
     if(related){
         getJSONData(PRODUCTS_URL).then(function (result) {
             if (result.status === "ok") {//si el estado del resultado es estrictamente igual al string ok
                const products = result.data;
                for(let i = 0; i < related.length; i++){
-                   const pR = products[related[i]];
+                   var autos = products[related[i]];
                    document.getElementById("relacionados").innerHTML += `<div class="lista text-center">
-                        <img class="mb-2" width="auto" height="120px" src="${pR.imgSrc}" alt="Image-${i}">
-                        <p><b>Nombre:</b> ${pR.name}</p>
-                        <p><b>Descripción:</b> ${pR.description}</p>
-                        <p><b>Costo:</b> ${pR.currency} ${pR.cost}</p>
-                    </div>`;
+                        <img class="mb-2" width="auto" height="120px" src="${autos.imgSrc}" alt="Image-${i}">
+                        <p><b>Nombre:</b> ${autos.name}</p>
+                        <p><b>Descripción:</b> ${autos.description}</p>
+                        <p><b>Costo:</b> ${autos.currency} ${autos.cost}</p>
+                        <a href="product-info.html">Ver info</a>
+                        </div>`;
                }
             }
         })
