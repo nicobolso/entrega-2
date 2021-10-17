@@ -110,13 +110,13 @@ function submitComment() {
 
 
 function showRelatedProducts() {
-    const related = productDetail.relatedProducts;
-    if(related){
+    const related = productDetail.relatedProducts;// declaro la constante related en donde le paso como valor la funcion productDetail para acceder a los relatedProducts
+    if(related){//si related existe entonces a traves de la funcion getJSONData hago un llamado a la url de los prooductos
         getJSONData(PRODUCTS_URL).then(function (result) {
             if (result.status === "ok") {//si el estado del resultado es estrictamente igual al string ok
                const products = result.data;
-               for(let i = 0; i < related.length; i++){
-                   var autos = products[related[i]];
+               for(let i = 0; i < related.length; i++){//recorro los elementos de relatedProducts
+                   var autos = products[related[i]];//declaro la variable autos donde guardo los elementos que se encuentran dentro de related
                    document.getElementById("relacionados").innerHTML += `<div class="lista text-center">
                         <img class="mb-2" width="auto" height="120px" src="${autos.imgSrc}" alt="Image-${i}">
                         <p><b>Nombre:</b> ${autos.name}</p>
