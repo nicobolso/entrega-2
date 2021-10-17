@@ -3,7 +3,7 @@
 //elementos HTML presentes.
 var carrito;
 
-function showCart(array) {
+function showCart(array) {// función que mostrara los productos del carrito
     document.getElementById("carrito").innerHTML = "";
     var contenido = "";
     for(i = 0;i < array.length; i++){
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
     })
 });
 
-function mostrarBoleta(array){
+function mostrarBoleta(array){//función donde se mostará la boleta de compra con el subtotal y los cambios de cantidad en tiempo real
     document.getElementById("boletaCompra").innerHTML = "";
     var contenido = "";
     for(i = 0;i < array.length; i++){
@@ -64,7 +64,7 @@ function mostrarBoleta(array){
 }
 
 
-function cambioDolar(unitCost) {
+function cambioDolar(unitCost) {//función que cambia de dólares a pesos
     return unitCost * 40;
 }
 
