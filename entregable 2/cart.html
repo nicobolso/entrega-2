@@ -21,7 +21,9 @@
       -ms-user-select: none;
       user-select: none;
     }
-
+  body{
+    background-color: gray;
+  }
     @media (min-width: 768px) {
       .bd-placeholder-img-lg {
         font-size: 3.5rem;
@@ -46,36 +48,54 @@
   <h1 style="text-align: center;">Mi carrito</h1>
   <p style="text-align: center;">Aquí encontrarás tus productos agregados al carrito</p>
 
-  
-    <div id="carrito" class="container ">
-      <div class="row justify-content-center">
-            <div class="col-12 col-md-6">
-            </div>
-            <div class="col-12 col-md-6">
-            </div>
-        </div>
-      </div>
-    
-  
-  <div id="boletaCompra">
-    <div class="container" class="card" style="width: 18rem;" style="float: right;">
-      <div class="row">
-        <div class="col">
-          <tr class="card">
-            <td>
 
-          <p></p>
-          <p id="count"></p>
-          <p></p>
-          <p id="subtotal"></p>
-        </td>
-        </tr>
-
-
-        </div>
+  <div class="container">
+    <div class="row">
+      <div id="carrito" class="text-center row col-12 col-md-8"></div>
+      <div id="boletaCompra" class="col-12 col-md-4"></div>
+    </div>
+  </div><br><br>
+  <div id="checkbox" class="container">
+    <div class="row justify-content-center">
+      <div class="row col-12 col-md-4">
+        <h1 mt-2 >Tipos de envío:</h1><br>
+        <div >
+                <input type="checkbox"  aria-label="Checkbox for following text input">Premium 2-5 días
+                <input type="checkbox"  aria-label="Checkbox for following text input">Medium 5-10 días
+                <input type="checkbox"  aria-label="Checkbox for following text input">Standar 10-15 días
+          </div>
       </div>
     </div>
-  </div>
+  </div><hr>
+  <div class="container">
+    <div class="row">
+      <div class="row col-12">
+        <h1>Información:</h1><br><br>
+        <div>
+          <br><br><form>
+            <div class="form-group">
+              <label for="formGroupExampleInput">Departamento</label>
+              <input type="text" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="formGroupExampleInput2">Ciudad</label>
+              <input type="text" class="form-control" ><label for="formGroupExampleInput2">Código postal</label><input type="number" class="form-control" >
+              <label for="formGroupExampleInput2">Dirección</label>
+              <input type="text" class="form-control" >
+              <label for="formGroupExampleInput2">Teléfono</label>
+              <input type="number" class="form-control" >
+            </div>
+          </form><hr>
+          <button  type="button" class="btn btn-secondary btn-sm mr-2">Enviar</button> 
+          
+       </div>
+        
+      </div>
+
+    </div> 
+  </div><hr>
+  
+
   <div id="spinner-wrapper">
     <div class="lds-ring">
       <div></div>
@@ -84,6 +104,7 @@
       <div></div>
     </div>
   </div>
+
   <script src="js/jquery-3.4.1.min.js"></script>
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/dropzone.js"></script>

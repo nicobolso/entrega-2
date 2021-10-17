@@ -2,108 +2,89 @@
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 var carrito;
-function showCart(array){
+
+function showCart(array) {
+    document.getElementById("carrito").innerHTML = "";
     var contenido = "";
     for(i = 0;i < array.length; i++){
-    
-         carrito = array[i];
-         contenido = `
-         
-        <div id="carrito" class="container">
-        <div class="row justify-content-center">
-        <div class="card" style="width: 18rem;">
-        <div class="card-body">
-        <div class="col-12 col-md-6">
-        </div>
-        <div class="col-12 col-md-6">
-        </div>
-        <img  style="center"; width="200px"; src=" ${carrito.src}"><hr>
-        <h5  class="card-title"> `  + carrito.name +` </h5><br>
-        <p>Cantidad:` + carrito.count + `</p>
-        <p>Precio por unidad: ` +  carrito.unitCost + ` </p>
-        <p>Moneda: ` +carrito.currency + ` </p>
-        <div class="btn-group" role="group" aria-label="Basic example">
-        <button id="sumar${i}" onClick() type="button" class="btn btn-secondary btn-sm">Sumar producto</button> 
-        <button id="quitar${i}" type="button" class="btn btn-secondary btn-sm">Quitar producto</button>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
-    
-        `
+        contenido = `
+            <div class="card col-12 col-md-6">
+                <div class="card-body">
+                    <img style="center" width="200px" src="${array[i].src}"><hr>
+                    <h5 class="card-title">${array[i].name}</h5><br>
+                    <p><strong>Cantidad:</strong> ${array[i].count}</p>
+                    <p><strong>Precio por unidad:</strong> ${array[i].unitCost}</p>
+                    <p><strong>Moneda:</strong> ${array[i].currency}</p>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button id="sumar${i}" onclick="addProductCount(${i});" type="button" class="btn btn-secondary btn-sm mr-2">Sumar producto</button> 
+                        <button id="quitar${i}" onclick="deleteProductCount(${i});" type="button" class="btn btn-secondary btn-sm">Quitar producto</button>
+                    </div>
+                </div>
+            </div>`;
         document.getElementById("carrito").innerHTML += contenido;
-        
     }
-    
-    }
+}
 
-
-
-
-document.addEventListener("DOMContentLoaded", function(e){
-    
+document.addEventListener("DOMContentLoaded", function(e) {
     getJSONData(CART_INFO_URL).then(function (result) {
         if (result.status === "ok") {
-            producto = result.data.articles;
-            showCart(producto);
-            mostrarBoleta(producto);
+            productos = result.data.articles;
+            carrito = productos;
+            showCart(productos);
+            mostrarBoleta(productos);
         }
     })
-    
-
 });
 
-  function mostrarBoleta(array){
-      var contenido = "";
-      for(i = 0;i < array.length; i++){
-        let sub = 
-           cart = array[i];
-           contenido = `
-        <div id="boletaCompra">
-        <div class="container"">
-        <div class="card" style="width: 18rem;">
-        <div class="card-body">
-        <div class="row">
-        <div class="col">
-        <tr class="card">
-        <td>
-        <h5 class="card-title">Producto: ${cart.name}</h5>
-        <p id="count">Cantindad: ${cart.count}</p>
-        <p>Precio: ${cart.unitCost} </p>
-        <p id="subtotal">Subtotal:</p>
-        </td>
-        </tr>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
-           `
-           document.getElementById("boletaCompra").innerHTML += contenido;
-      }
-  }  
+function mostrarBoleta(array){
+    document.getElementById("boletaCompra").innerHTML = "";
+    var contenido = "";
+    for(i = 0;i < array.length; i++){
+       var cart = array[i];
+       var unitCost = cart.unitCost;
+       if (cart.currency === "USD") {
+           unitCost = cambioDolar(cart.unitCost);
+       }
 
- 
-
-function cambioDolar(){
-    if(carrito.currency === "USD"){
-        carrito.unitCost * 40;
-
+       contenido = `
+            <div class="card mt-2">
+                <div class="card-body">
+                    <tr class="card">
+                        <td>
+                            <h5 class="card-title">Producto: ${cart.name}</h5>
+                            <p id="count"><strong>Cantindad:</strong> ${cart.count}</p>
+                            <p><strong>Precio:</strong> UYU ${unitCost}</p>
+                            <p id="subtotal"><strong>Subtotal:</strong> UYU ${unitCost * cart.count}</p>
+                        </td>
+                    </tr>
+                </div>
+            </div>`;
+       document.getElementById("boletaCompra").innerHTML += contenido;
     }
-
-}
-function calcSub(unitCost, count){
-    unitCost * count;
-    console.log(unitCost*count);
-
-}
-function sumarProduct(){
-
 }
 
 
+function cambioDolar(unitCost) {
+    return unitCost * 40;
+}
+
+function addProductCount(idProduct) { // Pasamos un id de producto (indice del array) para actualizar la cantidad de productos
+    if (carrito && carrito[idProduct]) {
+        carrito[idProduct].count = carrito[idProduct].count + 1;
+        showCart(carrito);
+        mostrarBoleta(carrito);
+    }
+}
+
+function deleteProductCount(idProduct) { // Pasamos un id de producto (indice del array) para actualizar la cantidad de productos
+    if (carrito && carrito[idProduct] && carrito[idProduct].count > 0) {
+        carrito[idProduct].count = carrito[idProduct].count - 1;
+        showCart(carrito);
+        mostrarBoleta(carrito);
+    }
+}
 
 
-    
+
+
+
