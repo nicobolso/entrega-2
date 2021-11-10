@@ -49,3 +49,25 @@ document.addEventListener("DOMContentLoaded", function (e) {
     document.getElementById("username").innerHTML = name.usuario;
   }
 });
+/*  var nombre = document.getElementById("name");
+var apellido = document.getElementById("lastname");
+var edad = document.getElementById("age");
+var email = document.getElementById("email");
+var telefono = document.getElementById("tel");
+
+    if(nombre !="" && apellido != "" && edad !="" && email !="" && telefono != ""){
+        localStorage.setItem("form", JSON.stringify({ value = nombre,value = apellido,value = edad,value = email,value = telefono }));
+
+    }
+
+
+
+
+       const formulario = JSON.parse(localStorage.getItem("form"));
+    function guardarDatos(){
+    if (formulario && formulario.nombre && formulario.apellido && formulario.edad && formulario.email && formulario.telefono) {
+    document.getElementById("form").innerHTML = formulario;
+    
+  }
+}
+    */

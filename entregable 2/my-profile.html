@@ -44,13 +44,36 @@
     </div>
   </nav>
   <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 6 (Fecha de entrega: 31/10/2021).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
-    </div>
+    <h1>Llena el formulario con tus datos para crear tu perfil</h1>
   </div>
+  <form id="form" class="border border-white">
+    <div class="form-row ">
+      <div class="form-group col-md-6">
+        <label for="inputName" required>Nombre</label>
+        <input  type="text" class="form-control" id="name">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputLastName" required>Apellido</label>
+        <input  type="text" class="form-control" id="lastname">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputAge" required>Edad</label>
+      <input style="width:70px;" type="number" class="form-control" id="age" >
+    </div>
+    <div class="form-group">
+      <label for="inputEmail" required>Email</label>
+      <input style="width: 500px;" type="email" class="form-control" id="email" placeholder="email@ejemplo.com">
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inpuTel" required>Teléfono de contacto</label>
+        <input type="text" class="form-control" id="tel">
+      </div>
+    </div>
+    <button id="guardar" type="button" class="btn btn-secondary btn-sm" >Guarar datos</button>
+    <button id="modificar" type="button" class="btn btn-secondary btn-sm" >Modificar datos</button>
+  </form>
   <footer class="text-muted bg-light">
     <div class="container">
       <p>Este sitio forma parte de Desarrollo Web - JAP - 2020</p>
