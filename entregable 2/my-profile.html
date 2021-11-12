@@ -36,7 +36,7 @@
 <body>
   <nav class="site-header sticky-top py-1 bg-dark">
     <div class="container d-flex flex-column flex-md-row justify-content-between">
-      <a class="py-2 d-none d-md-inline-block" href="index.html">Inicio</a>
+      <a class="py-2 d-none d-md-inline-block" href="inicio.html">Inicio</a>
       <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
       <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
       <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
@@ -45,35 +45,51 @@
   </nav>
   <div class="container p-5">
     <h1>Llena el formulario con tus datos para crear tu perfil</h1>
+    <form id="profileForm" class="border border-white" novalidate>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="name">Nombre</label>
+          <input type="text" class="form-control"  placeholder ="Carlos" id="name" required />
+          <div class="invalid-feedback">
+            Asegúrese de ingresar su nombre.
+          </div>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="lastName">Apellido</label>
+          <input type="text" class="form-control" placeholder ="Correa" id="lastName" required />
+          <div class="invalid-feedback">
+            Asegúrese de ingresar su apellido.
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-2">
+          <label for="age">Edad</label>
+          <input type="number" min="18" max="120" class="form-control" id="age" required/>
+          <div class="invalid-feedback">
+            Asegúrese de ingresar su edad.
+          </div>
+        </div>
+        <div class="form-group col-md-10">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" id="email" placeholder="email@ejemplo.com" required />
+          <div class="invalid-feedback">
+            Asegúrese de ingresar su email.
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="phone">Teléfono de contacto</label>
+          <input type="text" class="form-control" placeholder ="099872316" id="phone" required />
+          <div class="invalid-feedback">
+            Asegúrese de ingresar su teléfono.
+          </div>
+        </div>
+      </div>
+      <button id="guardar" type="submit" class="btn btn-secondary btn-sm" >Guarar datos</button>
+    </form>
   </div>
-  <form id="form" class="border border-white">
-    <div class="form-row ">
-      <div class="form-group col-md-6">
-        <label for="inputName" required>Nombre</label>
-        <input  type="text" class="form-control" id="name">
-      </div>
-      <div class="form-group col-md-6">
-        <label for="inputLastName" required>Apellido</label>
-        <input  type="text" class="form-control" id="lastname">
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="inputAge" required>Edad</label>
-      <input style="width:70px;" type="number" class="form-control" id="age" >
-    </div>
-    <div class="form-group">
-      <label for="inputEmail" required>Email</label>
-      <input style="width: 500px;" type="email" class="form-control" id="email" placeholder="email@ejemplo.com">
-    </div>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="inpuTel" required>Teléfono de contacto</label>
-        <input type="text" class="form-control" id="tel">
-      </div>
-    </div>
-    <button id="guardar" type="button" class="btn btn-secondary btn-sm" >Guarar datos</button>
-    <button id="modificar" type="button" class="btn btn-secondary btn-sm" >Modificar datos</button>
-  </form>
   <footer class="text-muted bg-light">
     <div class="container">
       <p>Este sitio forma parte de Desarrollo Web - JAP - 2020</p>
@@ -100,5 +116,4 @@
   <script src="js/init.js"></script>
   <script src="js/my-profile.js"></script>
 </body>
-
 </html>
