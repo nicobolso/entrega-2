@@ -34,13 +34,53 @@ document.addEventListener("DOMContentLoaded", function(e) {
             mostrarBoleta(productos);
         }
     })
+
+    var btnSave = document.getElementById("btn-save");
+    btnSave.addEventListener('click', function() {
+        var paymentMethod = document.querySelector('input[name="payMethod"]:checked').value;
+        var cardNumber = document.getElementById("cardNumber").value;
+        var segurityCode = document.getElementById("cvc").value;
+        var dateCard = document.getElementById("date").value;
+        var accountNumber = document.getElementById("accountNumber").value;
+        var errorMsj =  document.getElementById("errorMsj");
+        var validateEmptyFields= true;
+
+        
+     
+
+        if (paymentMethod === "tc"){
+            
+            validateEmptyFields = false;
+            alert("Debe llenar los campos correctamente")
+          
+            console.log(validateEmptyFields, "hola");
+           
+             
+            
+
+
+
+        }else if(paymentMethod === "tc" && paymentMethod !== "tb" && cardNumber !== "" && segurityCode !== "" && dateCard !== ""){
+            validateEmptyFields;
+            console.log(validateEmptyFields, "hola");
+
+        }
+         else if (paymentMethod === "tb" &&  paymentMethod !== "tc" && accountNumber == "") {
+            validateEmptyFields = false;
+            alert("debe llenar los campos")
+            
+
+        } else if (paymentMethod === "tb" &&  paymentMethod !== "tc" && accountNumber !== "") {
+            validateEmptyFields;
+        
+        }
+    });
 });
 
 function mostrarBoleta(array){//función donde se mostará la boleta de compra con el subtotal y los cambios de cantidad en tiempo real
     document.getElementById("boletaCompra").innerHTML = "";
     var contenido = "";
-    var percentage = document.querySelector('input[name="sendType"]:checked').value;
-    console.log(percentage);
+    var percentage = document.querySelector('input[name="sendType"]:checked');
     for(i = 0;i < array.length; i++){
        var cart = array[i];
        var unitCost = cart.unitCost;
@@ -48,7 +88,10 @@ function mostrarBoleta(array){//función donde se mostará la boleta de compra c
            unitCost = cambioDolar(cart.unitCost);
        }
        var subTotal = unitCost * cart.count;
-
+       var sendCost = 0;
+       if (percentage) {
+           sendCost = (subTotal * percentage.value) / 100;
+       }
        contenido = `
             <div class="card mt-2">
                 <div class="card-body">
@@ -57,8 +100,9 @@ function mostrarBoleta(array){//función donde se mostará la boleta de compra c
                             <h5 class="card-title">Producto: ${cart.name}</h5>
                             <p id="count"><strong>Cantindad:</strong> ${cart.count}</p>
                             <p><strong>Precio:</strong> UYU ${unitCost}</p>
-                            <p><strong>Costo de envío:</strong> UYU ${subTotal}</p>
+                            <p><strong>Costo de envío:</strong> UYU ${sendCost}</p>
                             <p id="subtotal"><strong>Subtotal:</strong> UYU ${subTotal}</p>
+                            <p><strong>Total:</strong> UYU ${subTotal + sendCost}</p>
                         </td>
                     </tr>
                 </div>
@@ -89,9 +133,10 @@ function deleteProductCount(idProduct) { // Pasamos un id de producto (indice de
 }
 
 document.querySelectorAll("input[name='sendType']").forEach((input) => {
-    input.addEventListener('change', mostrarBoleta(carrito));
+    input.addEventListener('change', function() {
+        mostrarBoleta(carrito);
+    });
 });
-
 
 
 

@@ -47,78 +47,148 @@
   </nav>
   <h1 style="text-align: center;">Mi carrito</h1>
   <p style="text-align: center;">Aquí encontrarás tus productos agregados al carrito</p>
-
-
-  <div class="container">
+  <div class="container mb-4">
     <div class="row">
       <div id="carrito" class="text-center row col-12 col-md-8"></div>
       <div id="boletaCompra" class="col-12 col-md-4"></div>
     </div>
-  </div><br><br>
-  <div id="checkbox" class="container">
-    <div class="row justify-content-center">
-      <div class="row col-12 col-md-4"> 
-        <div>
-          <h1>Tipo de envío</h1>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="sendType" id="sendType1" value="15" checked />
-            <label class="form-check-label" for="sendType1">
-              Premium 2-5 días (15%)
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="sendType" id="sendType2" value="7" />
-            <label class="form-check-label" for="sendType2">
-              Express 5-8 días (7%)
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="sendType" id="sendType3" value="5" />
-            <label class="form-check-label" for="sendType3">
-              Standard 12-15 días (5%)            
-            </label>
+    <div id="checkbox" class="mt-4 mb-4">
+      <div class="row justify-content-center text-center">
+        <div class="row col-12 col-md-4">
+          <div>
+            <h1>Tipo de envío</h1>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="sendType" id="sendType1" value="15" />
+              <label class="form-check-label" for="sendType1">
+                Premium 2-5 días (15%)
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="sendType" id="sendType2" value="7" />
+              <label class="form-check-label" for="sendType2">
+                Express 5-8 días (7%)
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="sendType" id="sendType3" value="5" checked />
+              <label class="form-check-label" for="sendType3">
+                Standard 12-15 días (5%)
+              </label>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div><hr>
-  <div class="container">
     <div class="row">
-      <div class="row col-12">
-        <h1>Información:</h1><br><br>
-        <div>
-          <br><br><form>
-            <div class="form-group">
-              <label for="formGroupExampleInput">Departamento</label>
-              <input type="text" class="form-control">
-            </div>
-            <div class="form-group">
-              <label for="formGroupExampleInput2">Ciudad</label>
-              <input type="text" class="form-control" ><label for="formGroupExampleInput2">Código postal</label><input type="number" class="form-control" >
-              <label for="formGroupExampleInput2">Calle</label>
-              <input type="text" class="form-control" >
-              <label for="formGroupExampleInput2">Número</label>
-              <input type="text" class="form-control" >
-              <label for="formGroupExampleInput2">Teléfono</label>
-              <input type="number" class="form-control" >
-            </div>
-          </form><hr>
-          <button  type="button" class="btn btn-secondary btn-sm mr-2">Enviar</button>
-
-       </div>
-
+      <div class="col-12">
+        <h1 class="col-12">Información:</h1>
+        <form class="col-12 row">
+          <div class="form-group col-12">
+            <label for="departament">Departamento</label>
+            <input type="text" id="departament" class="form-control">
+          </div>
+          <div class="form-group col-12">
+            <label for="city">Ciudad</label>
+            <input type="text" id="city" class="form-control" >
+          </div>
+          <div class="form-group col-12">
+            <label for="zipCode">Código postal</label>
+            <input type="number" id="zipCode" class="form-control" >
+          </div>
+          <div class="form-group col-12">
+            <label for="street">Calle</label>
+            <input type="text" id="street" class="form-control" >
+          </div>
+          <div class="form-group col-12">
+            <label for="number">Número</label>
+            <input type="text" id="number" class="form-control" >
+          </div>
+          <div class="form-group col-12">
+            <label for="phone">Teléfono</label>
+            <input type="text" id="phone" class="form-control" >
+          </div>
+          <div class="form-group col-12 mb-4 mt-4">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#method">
+              Seleccionar forma de pago
+            </button>
+          </div>
+          <div class="form-group col-12">
+            <button  type="button" class="btn btn-secondary btn-md float-right">Enviar</button>
+          </div>
+        </form>
       </div>
-
     </div>
-  </div><hr>
-
-
+  </div>
   <div id="spinner-wrapper">
     <div class="lds-ring">
       <div></div>
       <div></div>
       <div></div>
       <div></div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="method" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Método de mpago</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div id="divError" style="display: none; color: red;">
+          <strong>Error!</strong> <span id="errorMsg"></span>
+          </div>
+        <div class="modal-body">
+          <h4>Forma de pago</h4>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="payMethod" id="tc" value="tc" checked />
+            <label class="form-check-label" for="tc">
+              Tarjeta de crédito
+            
+            </label>
+          </div>
+          <div class="col-12 row">
+            <div class="form-group col-8">
+              <label for="cardNumnber">Nro Tarjeta</label>
+              <input type="text" id="cardNumber" class="form-control" />
+              <div class="invalid-feedback">
+                Debe llenar este campo
+              </div>
+            </div>
+            <div class="form-group col-4">
+              <label for="cvc">CVC</label>
+              <input type="number" min="100" max="999" id="cvc" class="form-control" />
+            </div>
+          </div>
+          <div class="form-group col-12">
+            <label for="date">Fecha de Vencimiento</label>
+            <input type="date" id="date" class="form-control" />
+            <div class="invalid-feedback">
+              Debe llenar este campo
+            </div>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="payMethod" id="tb" value="tb" />
+            <label class="form-check-label" for="tb">
+              Transferencia bancaria
+            </label>
+          </div>
+          <div class="form-group col-12">
+            <label for="accountNumber">Nro Cuenta</label>
+            <input type="text" placeholder="Nro Cuenta" id="accountNumber" class="form-control" />
+            <div class="invalid-feedback">
+              Debe llenar este campo
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" id="btn-save" class="btn btn-primary">Guardar</button>
+        </div>
+      </div>
     </div>
   </div>
 
