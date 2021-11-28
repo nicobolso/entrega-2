@@ -42,37 +42,54 @@ document.addEventListener("DOMContentLoaded", function(e) {
         var segurityCode = document.getElementById("cvc").value;
         var dateCard = document.getElementById("date").value;
         var accountNumber = document.getElementById("accountNumber").value;
-        var errorMsj =  document.getElementById("errorMsj");
-        var validateEmptyFields= true;
+        var divError = document.getElementById("divError");
+        var errorMsj = document.getElementById("errorMsg");
+        var error = false;
+        divError.style.display = "none";
 
-        
-     
+        if (paymentMethod === "tc") {
+            var today = new Date();
+            var newDateCard;
+            if (dateCard.trim() !== "") {
+                newDateCard = new Date(dateCard);
+            }
 
-        if (paymentMethod === "tc"){
-            
-            validateEmptyFields = false;
-            alert("Debe llenar los campos correctamente")
-          
-            console.log(validateEmptyFields, "hola");
-           
-             
-            
-
-
-
-        }else if(paymentMethod === "tc" && paymentMethod !== "tb" && cardNumber !== "" && segurityCode !== "" && dateCard !== ""){
-            validateEmptyFields;
-            console.log(validateEmptyFields, "hola");
-
+            if (cardNumber.trim() === ""){
+                errorMsj.innerHTML = "El campo número de tarjeta es requerido.";
+                error = true;
+            } else if (!/^[0-9]+$/.test(cardNumber.trim())) {
+                errorMsj.innerHTML = "Número de tarjeta solo admite números.";
+                error = true;
+            } else if(segurityCode.trim() === "") {
+                errorMsj.innerHTML = "El código de seguridad es requerido.";
+                error = true;
+            }  else if (!/^[0-9]{3}$/.test(segurityCode.trim())) {
+                errorMsj.innerHTML = "Código de seguridad inválido.";
+                error = true;
+            } else if(dateCard.trim() === "") {
+                errorMsj.innerHTML = "La fecha de vencimiento es requerida..";
+                error = true;
+            } else if(newDateCard && newDateCard.toISOString() < today.toISOString()) {
+                errorMsj.innerHTML = "La fecha de vencimiento es inválida.";
+                error = true;
+            }
+        } else if(paymentMethod === "tb") {
+            if (accountNumber.trim() === ""){
+                errorMsj.innerHTML = "El campo número de cuenta es requerido.";
+                error = true;
+            } else if (!/^[0-9]+$/.test(accountNumber.trim())) {
+                errorMsj.innerHTML = "Número de cuenta solo admite números.";
+                error = true;
+            }
+        } else {
+            return false;
         }
-         else if (paymentMethod === "tb" &&  paymentMethod !== "tc" && accountNumber == "") {
-            validateEmptyFields = false;
-            alert("debe llenar los campos")
-            
 
-        } else if (paymentMethod === "tb" &&  paymentMethod !== "tc" && accountNumber !== "") {
-            validateEmptyFields;
-        
+        if (error) {
+            divError.style.display = "block";
+        } else {
+            divError.style.display = "none";
+            $("[data-dismiss=modal]").trigger({ type: "click" });
         }
     });
 });
